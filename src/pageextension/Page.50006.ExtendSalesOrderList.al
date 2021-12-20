@@ -9,6 +9,11 @@ pageextension 50006 ExttendSalesOrderList extends "Sales Order List"
                 ApplicationArea = All;
                 Caption = 'Commission Percentage';
             }
+            field("Commission Overwrite"; Rec."Commission Overwrite")
+            {
+                ApplicationArea = All;
+                Caption = 'Commission Overwrite %';
+            }
         }
     }
 

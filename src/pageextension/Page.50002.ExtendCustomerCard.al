@@ -9,6 +9,11 @@ pageextension 50002 ExtendCustomerCard extends "Customer Card"
                 ApplicationArea = All;
                 Caption = 'Commission Percentage';
             }
+            field("Commission Overwrite"; Rec."Commission Overwrite")
+            {
+                ApplicationArea = All;
+                Caption = 'Commission Overwrite %';
+            }
         }
     }
 

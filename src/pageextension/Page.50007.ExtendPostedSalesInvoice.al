@@ -9,6 +9,11 @@ pageextension 50007 ExtendPostedSalesInvoice extends "Posted Sales Invoice"
                 ApplicationArea = All;
                 Caption = 'Commission Percentage';
             }
+            field("Commission Overwrite"; Rec."Commission Overwrite")
+            {
+                ApplicationArea = All;
+                Caption = 'Commission Overwrite %';
+            }
         }
     }
 
