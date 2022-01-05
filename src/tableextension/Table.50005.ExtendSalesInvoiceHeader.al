@@ -14,6 +14,11 @@ tableextension 50005 ExtendSalesInvoiceHeader extends "Sales Invoice Header"
             Caption = 'Commission Overwrite %';
             DecimalPlaces = 0 : 5;
         }
+        field(50002; "Salesperson Code 2"; Code[20])
+        {
+            Caption = 'Salesperson Code 2';
+            TableRelation = "Salesperson/Purchaser";
+        }
     }
 
     var

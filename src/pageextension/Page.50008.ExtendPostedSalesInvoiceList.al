@@ -15,6 +15,14 @@ pageextension 50008 ExtendPostedSalesInvoices extends "Posted Sales Invoices"
                 Caption = 'Commission Overwrite %';
             }
         }
+        addafter("Salesperson Code")
+        {
+            field("Salesperson Code 2"; Rec."Salesperson Code 2")
+            {
+                ApplicationArea = All;
+                Caption = 'Salesperson Code 2';
+            }
+        }
     }
 
     actions
