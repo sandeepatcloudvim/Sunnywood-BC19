@@ -9,6 +9,11 @@ pageextension 50009 ExtendShipToAddress extends "Ship-to Address"
                 ApplicationArea = All;
                 Caption = 'Commission Overwrite %';
             }
+            field("Service Rep"; Rec."Service Rep")
+            {
+                ApplicationArea = All;
+                Caption = 'Service Rep';
+            }
         }
     }
 

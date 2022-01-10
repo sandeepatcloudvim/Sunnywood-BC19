@@ -16,7 +16,7 @@ tableextension 50004 ExtendSalesShipmentHeader extends "Sales Shipment Header"
         }
         field(50002; "Salesperson Code 2"; Code[20])
         {
-            Caption = 'Salesperson Code 2';
+            Caption = 'Service Rep';
             TableRelation = "Salesperson/Purchaser";
         }
     }

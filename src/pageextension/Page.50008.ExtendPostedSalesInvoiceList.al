@@ -20,7 +20,7 @@ pageextension 50008 ExtendPostedSalesInvoices extends "Posted Sales Invoices"
             field("Salesperson Code 2"; Rec."Salesperson Code 2")
             {
                 ApplicationArea = All;
-                Caption = 'Salesperson Code 2';
+                Caption = 'Service Rep';
             }
         }
     }
