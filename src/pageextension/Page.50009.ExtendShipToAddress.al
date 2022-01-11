@@ -14,6 +14,11 @@ pageextension 50009 ExtendShipToAddress extends "Ship-to Address"
                 ApplicationArea = All;
                 Caption = 'Service Rep';
             }
+            field("Creation Date"; DT2DATE(Rec.SystemCreatedAt))
+            {
+                ApplicationArea = All;
+                Caption = 'Creation Date';
+            }
         }
     }
 

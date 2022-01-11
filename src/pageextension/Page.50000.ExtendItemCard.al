@@ -7,12 +7,12 @@ pageextension 50000 ExtendItemCard extends "Item Card"
             field("Commission Percentage"; Rec."Commission Percentage")
             {
                 ApplicationArea = All;
-                Caption = 'Commission Percentage';
+                Caption = 'Commission %';
             }
-            field("Commission Overwrite"; Rec."Commission Overwrite")
+            field("Creation Date"; DT2DATE(Rec.SystemCreatedAt))
             {
                 ApplicationArea = All;
-                Caption = 'Commission Overwrite %';
+                Caption = 'Creation Date';
             }
         }
     }

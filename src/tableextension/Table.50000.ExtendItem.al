@@ -5,7 +5,7 @@ tableextension 50000 ExtendItem extends Item
         field(50000; "Commission Percentage"; Decimal)
         {
             DataClassification = CustomerContent;
-            Caption = 'Commission Percentage';
+            Caption = 'Commission %';
             DecimalPlaces = 0 : 5;
 
         }
@@ -14,7 +14,9 @@ tableextension 50000 ExtendItem extends Item
             DataClassification = CustomerContent;
             Caption = 'Commission Overwrite %';
             DecimalPlaces = 0 : 5;
+
         }
+
     }
 
     var

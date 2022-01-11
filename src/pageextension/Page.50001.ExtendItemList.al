@@ -7,12 +7,7 @@ pageextension 50001 ExtendItemList extends "Item List"
             field("Commission Percentage"; Rec."Commission Percentage")
             {
                 ApplicationArea = All;
-                Caption = 'Commission Percentage';
-            }
-            field("Commission Overwrite"; Rec."Commission Overwrite")
-            {
-                ApplicationArea = All;
-                Caption = 'Commission Overwrite %';
+                Caption = 'Commission %';
             }
         }
     }

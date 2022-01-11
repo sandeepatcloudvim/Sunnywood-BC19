@@ -5,7 +5,7 @@ tableextension 50001 ExtendCustomer extends Customer
         field(50000; "Commission Percentage"; Decimal)
         {
             DataClassification = CustomerContent;
-            Caption = 'Commission Percentage';
+            Caption = 'Commission %';
             DecimalPlaces = 0 : 5;
         }
         field(50001; "Commission Overwrite"; Decimal)
@@ -14,6 +14,7 @@ tableextension 50001 ExtendCustomer extends Customer
             Caption = 'Commission Overwrite %';
             DecimalPlaces = 0 : 5;
         }
+
     }
 
     var
