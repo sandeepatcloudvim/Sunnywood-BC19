@@ -16,6 +16,12 @@ tableextension 50000 ExtendItem extends Item
             DecimalPlaces = 0 : 5;
 
         }
+        field(50002; "Record Creation Date"; Date)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Record Creation Date';
+        }
+
 
     }
 

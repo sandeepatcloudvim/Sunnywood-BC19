@@ -9,6 +9,11 @@ pageextension 50001 ExtendItemList extends "Item List"
                 ApplicationArea = All;
                 Caption = 'Commission %';
             }
+            field("Record Creation Date"; Rec."Record Creation Date")
+            {
+                ApplicationArea = All;
+                Caption = 'Record Creation Date';
+            }
         }
     }
 

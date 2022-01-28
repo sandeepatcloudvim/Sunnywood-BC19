@@ -9,11 +9,12 @@ pageextension 50000 ExtendItemCard extends "Item Card"
                 ApplicationArea = All;
                 Caption = 'Commission %';
             }
-            field("Creation Date"; DT2DATE(Rec.SystemCreatedAt))
+            field("Record Creation Date"; Rec."Record Creation Date")
             {
                 ApplicationArea = All;
-                Caption = 'Creation Date';
+                Caption = 'Record Creation Date';
             }
+
         }
     }
 

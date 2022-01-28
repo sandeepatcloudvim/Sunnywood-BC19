@@ -13,6 +13,16 @@ tableextension 50006 ExtendShiptoAddress extends "Ship-to Address"   //T=222
             Caption = 'Service Rep';
             TableRelation = "Salesperson/Purchaser";
         }
+        field(50003; "Record Creation Date"; Date)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Record Creation Date';
+        }
+        field(50004; "Salesperson Code"; Code[20])
+        {
+            Caption = 'Salesperson Code';
+            TableRelation = "Salesperson/Purchaser";
+        }
     }
 
     var

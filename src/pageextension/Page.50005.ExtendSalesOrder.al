@@ -2,6 +2,7 @@ pageextension 50005 ExtendSalesOrder extends "Sales Order"
 {
     layout
     {
+
         addafter("Payment Discount %")
         {
             field("Commission Percentage"; Rec."Commission Percentage")
@@ -27,7 +28,23 @@ pageextension 50005 ExtendSalesOrder extends "Sales Order"
 
     actions
     {
-        // Add changes to page actions here
+        addafter("Print Confirmation")
+        {
+            action(BillofLading)
+            {
+                ApplicationArea = All;
+                Caption = 'Bill of Lading';
+                Image = Print;
+                PromotedCategory = Category11;
+                Promoted = true;
+                trigger OnAction()
+                begin
+                    CurrPage.SetSelectionFilter(Rec);
+                    Report.Run(50000, true, false, Rec);
+                end;
+            }
+
+        }
     }
 
     var

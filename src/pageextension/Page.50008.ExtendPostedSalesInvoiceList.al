@@ -27,7 +27,20 @@ pageextension 50008 ExtendPostedSalesInvoices extends "Posted Sales Invoices"
 
     actions
     {
-        // Add changes to page actions here
+        addafter("&Invoice")
+        {
+
+            action("Sales Invoice Detail Page")
+            {
+                ApplicationArea = All;
+                Caption = 'Sales Invoice Detail Page';
+                Image = Invoice;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                RunObject = page "Sales Invoice Detail Page";
+            }
+        }
     }
 
     var

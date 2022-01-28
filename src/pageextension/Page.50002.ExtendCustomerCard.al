@@ -9,10 +9,25 @@ pageextension 50002 ExtendCustomerCard extends "Customer Card"
                 ApplicationArea = All;
                 Caption = 'Commission %';
             }
-            field("Creation Date"; DT2DATE(Rec.SystemCreatedAt))
+            field("Record Creation Date"; Rec."Record Creation Date")
             {
                 ApplicationArea = All;
-                Caption = 'Creation Date';
+                Caption = 'Record Creation Date';
+            }
+            field("Supporting Program"; Rec."Supporting Program")
+            {
+                ApplicationArea = All;
+                Caption = 'Supporting Program';
+            }
+            field("Freight Prepaid Amount"; Rec."Freight Prepaid Amount")
+            {
+                ApplicationArea = All;
+                Caption = 'Freight Prepaid Amount';
+            }
+            field("Pricing Multiplier"; Rec."Pricing Multiplier")
+            {
+                ApplicationArea = All;
+                Caption = 'Pricing Multiplier';
             }
         }
     }
