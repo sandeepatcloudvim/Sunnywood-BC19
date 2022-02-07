@@ -221,6 +221,10 @@ report 50000 "Bill of Lading"
                     column(OrderDate_SalesHeader; "Sales Header"."Order Date")
                     {
                     }
+                    column(ShippingAgentCode; "Sales Header"."Shipping Agent Code")
+                    {
+
+                    }
                     column(CompanyAddress7; CompanyAddress[7])
                     {
                     }
@@ -304,6 +308,78 @@ report 50000 "Bill of Lading"
                         }
                         column(TempSalesLineNo; TempSalesLine."No.")
                         {
+                        }
+                        column(LineNos; TempSalesLine."Line No.")
+                        {
+
+                        }
+                        column(GTIN; recItem.GTIN)
+                        {
+
+                        }
+                        column(Tariff_Desc; TariffNumber.Description)
+                        {
+
+                        }
+                        column(GrossWeight; recItem."Gross Weight")
+                        {
+
+                        }
+                        column(UnitVolume; recItem."Unit Volume")
+                        {
+
+                        }
+                        column(Frtcls_1; Frtcls[1])
+                        {
+
+                        }
+                        column(Frtcls_2; Frtcls[2])
+                        {
+
+                        }
+                        column(Frtcls_3; Frtcls[3])
+                        {
+
+                        }
+                        column(Frtcls_4; Frtcls[4])
+                        {
+
+                        }
+                        column(Frtcls_5; Frtcls[5])
+                        {
+
+                        }
+                        column(Frtcls_6; Frtcls[6])
+                        {
+
+                        }
+                        column(Frtcls_7; Frtcls[7])
+                        {
+
+                        }
+                        column(Frtcls_8; Frtcls[8])
+                        {
+
+                        }
+                        column(Frtcls_9; Frtcls[9])
+                        {
+
+                        }
+                        column(Frtcls_10; Frtcls[10])
+                        {
+
+                        }
+                        column(Frtcls_11; Frtcls[11])
+                        {
+
+                        }
+                        column(Frtcls_12; Frtcls[12])
+                        {
+
+                        }
+                        column(TotalCube; TotalCube)
+                        {
+
                         }
                         column(TempSalesLineUOM; TempSalesLine."Unit of Measure")
                         {
@@ -458,6 +534,7 @@ report 50000 "Bill of Lading"
                         trigger OnAfterGetRecord()
                         var
                             SalesLine: Record "Sales Line";
+
                         begin
                             OnLineNumber := OnLineNumber + 1;
 
@@ -466,6 +543,39 @@ report 50000 "Bill of Lading"
                                     Find('-')
                                 else
                                     Next;
+
+                                if recItem.Get(TempSalesLine."No.") then begin
+                                    TotalCube := TotalCube + (recItem."Unit Volume" * TempSalesLine."Qty. to Ship");
+                                    if TariffNumber.Get(recItem."Tariff No.") then begin
+                                        case TariffNumber."Freight Class" of
+                                            60.00:
+                                                Frtcls[1] := Frtcls[1] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            70.00:
+                                                Frtcls[2] := Frtcls[2] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            77.50:
+                                                Frtcls[3] := Frtcls[3] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            85.00:
+                                                Frtcls[4] := Frtcls[4] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            92.50:
+                                                Frtcls[5] := Frtcls[5] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            100.00:
+                                                Frtcls[6] := Frtcls[6] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            125.00:
+                                                Frtcls[7] := Frtcls[7] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            150.00:
+                                                Frtcls[8] := Frtcls[8] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            175.00:
+                                                Frtcls[9] := Frtcls[9] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            250.00:
+                                                Frtcls[10] := Frtcls[10] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            300.00:
+                                                Frtcls[11] := Frtcls[11] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                            400.00:
+                                                Frtcls[12] := Frtcls[12] + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
+                                        end
+
+                                    end;
+                                end;
 
                                 if Type = Type::" " then begin
                                     "No." := '';
@@ -516,6 +626,8 @@ report 50000 "Bill of Lading"
                             SetRange(Number, 1, NumberOfLines);
                             OnLineNumber := 0;
                         end;
+
+
                     }
                 }
 
@@ -608,6 +720,7 @@ report 50000 "Bill of Lading"
                     UseDate := WorkDate;
             end;
         }
+
     }
 
     requestpage
@@ -698,7 +811,8 @@ report 50000 "Bill of Lading"
     begin
         CompanyInformation.Get();
         FormatDocument.SetLogoPosition(SalesSetup."Logo Position on Documents", CompanyInfo1, CompanyInfo2, CompanyInfo3);
-
+        Clear(Frtcls);
+        Clear(TotalCube);
         if PrintCompany then
             FormatAddress.Company(CompanyAddress, CompanyInformation)
         else
@@ -709,6 +823,9 @@ report 50000 "Bill of Lading"
         TaxLiable: Decimal;
         UnitPriceToPrint: Decimal;
         AmountExclInvDisc: Decimal;
+        TotalCube: Decimal;
+        recItem: Record Item;
+        TariffNumber: Record "Tariff Number";
         ShipmentMethod: Record "Shipment Method";
         PaymentTerms: Record "Payment Terms";
         SalesPurchPerson: Record "Salesperson/Purchaser";
@@ -735,6 +852,7 @@ report 50000 "Bill of Lading"
         CompanyAddress: array[8] of Text[100];
         BillToAddress: array[8] of Text[100];
         ShipToAddress: array[8] of Text[100];
+        Frtcls: array[12] of Decimal;
         CopyTxt: Text;
         SalespersonText: Text[50];
         PrintCompany: Boolean;
