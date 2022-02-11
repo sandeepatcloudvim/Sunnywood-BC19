@@ -24,6 +24,11 @@ pageextension 50009 ExtendShipToAddress extends "Ship-to Address"
                 ApplicationArea = All;
                 Caption = 'Record Creation Date';
             }
+            field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
+            {
+                ApplicationArea = All;
+                Caption = 'Gen. Bus. Posting Group';
+            }
         }
     }
 

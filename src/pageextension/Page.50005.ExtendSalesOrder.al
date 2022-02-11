@@ -24,6 +24,14 @@ pageextension 50005 ExtendSalesOrder extends "Sales Order"
                 Caption = 'Service Rep';
             }
         }
+        addbefore("VAT Bus. Posting Group")
+        {
+            field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
+            {
+                ApplicationArea = All;
+                Caption = 'Gen. Bus. Posting Group';
+            }
+        }
     }
 
     actions

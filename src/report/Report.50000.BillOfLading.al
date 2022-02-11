@@ -152,6 +152,10 @@ report 50000 "Bill of Lading"
                     column(CopyTxt; CopyTxt)
                     {
                     }
+                    column(Freight; Cust."Freight Prepaid Amount")
+                    {
+
+                    }
                     column(BillToAddress1; BillToAddress[1])
                     {
                     }
@@ -198,6 +202,10 @@ report 50000 "Bill of Lading"
                     {
                     }
                     column(ShipToCode; "Sales Header"."Ship-to Code")
+                    {
+
+                    }
+                    column(ShipToContact; "Sales Header"."Ship-to Contact")
                     {
 
                     }
@@ -306,6 +314,10 @@ report 50000 "Bill of Lading"
                         column(AmountExclInvDisc; AmountExclInvDisc)
                         {
                         }
+                        column(Type_SalesLine; TempSalesLine.Type)
+                        {
+
+                        }
                         column(TempSalesLineNo; TempSalesLine."No.")
                         {
                         }
@@ -378,6 +390,14 @@ report 50000 "Bill of Lading"
 
                         }
                         column(TotalCube; TotalCube)
+                        {
+
+                        }
+                        column(TotalWeight; TotalWeight)
+                        {
+
+                        }
+                        column(ShippedAmt; ShippedAmt)
                         {
 
                         }
@@ -545,7 +565,10 @@ report 50000 "Bill of Lading"
                                     Next;
 
                                 if recItem.Get(TempSalesLine."No.") then begin
+                                    TotalWeight := TotalWeight + (recItem."Gross Weight" * TempSalesLine."Qty. to Ship");
                                     TotalCube := TotalCube + (recItem."Unit Volume" * TempSalesLine."Qty. to Ship");
+                                    if TempSalesLine."Qty. to Ship" <> 0 then
+                                        ShippedAmt := ShippedAmt + ((TempSalesLine."Unit Price" * TempSalesLine."Qty. to Ship") - ((TempSalesLine."Line Discount Amount" / TempSalesLine.Quantity) * TempSalesLine."Qty. to Ship"));
                                     if TariffNumber.Get(recItem."Tariff No.") then begin
                                         case TariffNumber."Freight Class" of
                                             60.00:
@@ -813,6 +836,8 @@ report 50000 "Bill of Lading"
         FormatDocument.SetLogoPosition(SalesSetup."Logo Position on Documents", CompanyInfo1, CompanyInfo2, CompanyInfo3);
         Clear(Frtcls);
         Clear(TotalCube);
+        Clear(TotalWeight);
+        Clear(ShippedAmt);
         if PrintCompany then
             FormatAddress.Company(CompanyAddress, CompanyInformation)
         else
@@ -824,6 +849,8 @@ report 50000 "Bill of Lading"
         UnitPriceToPrint: Decimal;
         AmountExclInvDisc: Decimal;
         TotalCube: Decimal;
+        TotalWeight: Decimal;
+        ShippedAmt: Decimal;
         recItem: Record Item;
         TariffNumber: Record "Tariff Number";
         ShipmentMethod: Record "Shipment Method";

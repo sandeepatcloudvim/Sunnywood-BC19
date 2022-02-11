@@ -10,5 +10,6 @@ codeunit 50000 ExtendEvents
     begin
         SalesHeader."Salesperson Code 2" := ShipToAddress."Service Rep";
         SalesHeader."Salesperson Code" := ShipToAddress."Salesperson Code";
+        SalesHeader.Validate("Gen. Bus. Posting Group", ShipToAddress."Gen. Bus. Posting Group");
     end;
 }

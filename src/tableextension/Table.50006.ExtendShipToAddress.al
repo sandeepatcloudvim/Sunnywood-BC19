@@ -23,6 +23,12 @@ tableextension 50006 ExtendShiptoAddress extends "Ship-to Address"   //T=222
             Caption = 'Salesperson Code';
             TableRelation = "Salesperson/Purchaser";
         }
+        field(50005; "Gen. Bus. Posting Group"; Code[20])
+        {
+            Caption = 'Gen. Bus. Posting Group';
+            TableRelation = "Gen. Business Posting Group";
+
+        }
     }
 
     var
