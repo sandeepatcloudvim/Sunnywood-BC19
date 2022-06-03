@@ -205,7 +205,7 @@ report 50000 "Bill of Lading"
                     {
 
                     }
-                    column(ShipToContact; "Sales Header"."Ship-to Contact")
+                    column(ShipToContact; "Sales Header"."Ship-to Name")
                     {
 
                     }
@@ -245,7 +245,7 @@ report 50000 "Bill of Lading"
                     column(ShipToAddress8; ShipToAddress[8])
                     {
                     }
-                    column(ShipmentMethodDesc; ShipmentMethod.Description)
+                    column(ShipmentMethodDesc; "Sales Header"."Shipping Agent Code" + ' / ' + "Sales Header"."Shipping Agent Service Code")//AGT_DS   ShipmentMethod.Description
                     {
                     }
                     column(PaymentTermsDesc; PaymentTerms.Description)
