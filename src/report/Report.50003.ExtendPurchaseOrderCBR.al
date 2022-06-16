@@ -522,55 +522,55 @@ report 50003 "Purchase Order CBR"
         {
             area(content)
             {
-                group(Options)
-                {
-                    CaptionML = ENU = 'Options',
-                                ESM = 'Opciones',
-                                FRC = 'Options',
-                                ENC = 'Options';
-                    field(NumberOfCopies; NoCopies)
-                    {
-                        CaptionML = ENU = 'Number of Copies',
-                                    ESM = 'Número de copias',
-                                    FRC = 'Nombre de copies',
-                                    ENC = 'Number of Copies';
-                    }
-                    field(PrintCompanyAddress; PrintCompany)
-                    {
-                        CaptionML = ENU = 'Print Company Address',
-                                    ESM = 'Imprimir dir. empresa',
-                                    FRC = 'Imprimer l''adresse de la compagnie',
-                                    ENC = 'Print Company Address';
-                    }
-                    field(ArchiveDocument; ArchiveDocument)
-                    {
-                        CaptionML = ENU = 'Archive Document',
-                                    ESM = 'Archivar documento',
-                                    FRC = 'Archiver document',
-                                    ENC = 'Archive Document';
-                        Enabled = ArchiveDocumentEnable;
+                // group(Options)
+                // {
+                //     CaptionML = ENU = 'Options',
+                //                 ESM = 'Opciones',
+                //                 FRC = 'Options',
+                //                 ENC = 'Options';
+                //     field(NumberOfCopies; NoCopies)
+                //     {
+                //         CaptionML = ENU = 'Number of Copies',
+                //                     ESM = 'Número de copias',
+                //                     FRC = 'Nombre de copies',
+                //                     ENC = 'Number of Copies';
+                //     }
+                //     field(PrintCompanyAddress; PrintCompany)
+                //     {
+                //         CaptionML = ENU = 'Print Company Address',
+                //                     ESM = 'Imprimir dir. empresa',
+                //                     FRC = 'Imprimer l''adresse de la compagnie',
+                //                     ENC = 'Print Company Address';
+                //     }
+                //     field(ArchiveDocument; ArchiveDocument)
+                //     {
+                //         CaptionML = ENU = 'Archive Document',
+                //                     ESM = 'Archivar documento',
+                //                     FRC = 'Archiver document',
+                //                     ENC = 'Archive Document';
+                //         Enabled = ArchiveDocumentEnable;
 
-                        trigger OnValidate();
-                        begin
-                            if not ArchiveDocument then
-                                LogInteraction := false;
-                        end;
-                    }
-                    field(LogInteraction; LogInteraction)
-                    {
-                        CaptionML = ENU = 'Log Interaction',
-                                    ESM = 'Log interacción',
-                                    FRC = 'Journal interaction',
-                                    ENC = 'Log Interaction';
-                        Enabled = LogInteractionEnable;
+                //         trigger OnValidate();
+                //         begin
+                //             if not ArchiveDocument then
+                //                 LogInteraction := false;
+                //         end;
+                //     }
+                //     field(LogInteraction; LogInteraction)
+                //     {
+                //         CaptionML = ENU = 'Log Interaction',
+                //                     ESM = 'Log interacción',
+                //                     FRC = 'Journal interaction',
+                //                     ENC = 'Log Interaction';
+                //         Enabled = LogInteractionEnable;
 
-                        trigger OnValidate();
-                        begin
-                            if LogInteraction then
-                                ArchiveDocument := ArchiveDocumentEnable;
-                        end;
-                    }
-                }
+                //         trigger OnValidate();
+                //         begin
+                //             if LogInteraction then
+                //                 ArchiveDocument := ArchiveDocumentEnable;
+                //         end;
+                //     }
+                //}
             }
         }
 
