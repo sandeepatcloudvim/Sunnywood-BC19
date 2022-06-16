@@ -206,6 +206,8 @@ report 50004 "Sales Order Confirmation CBR"
                     column(ExtDocNo_SalesHeader; "Sales Header"."External Document No.")
                     {
                     }
+                    column(RespCenter_SalesHeader; "Sales Header"."Responsibility Center")
+                    { }
                     column(SalesPurchPersonName; SalesPurchPerson.Name)
                     {
                     }
@@ -832,7 +834,7 @@ report 50004 "Sales Order Confirmation CBR"
         UnitCaptionLbl: TextConst ENU = 'Unit', ESM = 'Unidad', FRC = 'Unité', ENC = 'Unit';
         DescriptionCaptionLbl: TextConst ENU = 'Description', ESM = 'Descripción', FRC = 'Description', ENC = 'Description';
         QuantityCaptionLbl: TextConst ENU = 'Ordered', ESM = 'Cantidad', FRC = 'Quantité', ENC = 'Ordered';
-        UnitPriceCaptionLbl: TextConst ENU = 'Unit Price', ESM = 'Precio unitario', FRC = 'Prix unitaire', ENC = 'Unit Price';
+        UnitPriceCaptionLbl: TextConst ENU = 'Discounted Unit Price', ESM = 'Precio unitario', FRC = 'Prix unitaire', ENC = 'Discounted Unit Price';
         TotalPriceCaptionLbl: TextConst ENU = 'Ext.Price', ESM = 'Precio total', FRC = 'Prix total', ENC = 'Ext.Price';
         SubtotalCaptionLbl: TextConst ENU = 'Subtotal:', ESM = 'Subtotal:', FRC = 'Sous-total :', ENC = 'Subtotal:';
         InvoiceDiscountCaptionLbl: TextConst ENU = 'Invoice Discount:', ESM = 'Descuento factura:', FRC = 'Escompte de la facture :', ENC = 'Invoice Discount:';
