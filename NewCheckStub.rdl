@@ -19,10 +19,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.02745in</Width>
+                  <Width>1.08027in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.99702in</Width>
+                  <Width>1.08174in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.80699in</Width>
@@ -50,12 +50,13 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="DocNoCaption">
+                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>OUR VOUCHER NUMBER</Value>
+                                  <Value>Our Voucher Number</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -84,12 +85,13 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="DocDateCaption">
+                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Constant">YOUR VOUCHER NUMBER</Value>
+                                  <Value>Your Voucher Number</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -123,7 +125,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value EvaluationMode="Constant">DATE</Value>
+                                  <Value>Date</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -165,7 +167,7 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -189,7 +191,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>AMOUNT PAID</Value>
+                                  <Value>Amount Paid</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -256,7 +258,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>WRITE-OFF</Value>
+                                  <Value EvaluationMode="Constant">Write-Off</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -856,7 +858,7 @@
               </Filter>
             </Filters>
             <Height>0.6974in</Height>
-            <Width>7.6906in</Width>
+            <Width>7.82814in</Width>
             <Style />
           </Tablix>
         </ReportItems>
@@ -1652,14 +1654,14 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>AMOUNT PAID</Value>
+                      <Value>Amount Paid</Value>
                       <Style>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Left</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>

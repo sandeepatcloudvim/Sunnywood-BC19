@@ -981,30 +981,32 @@ report 50008 "NewCheckStubCheckStub"
                         else
                             ControlLen := 29;
                         CheckAmountText := CheckAmountText + DollarSignBefore + DollarSignAfter;
-                        Index := 0;
-                        if CheckAmountText = Text024 then begin
-                            if StrLen(CheckAmountText) < (ControlLen - 12) then begin
-                                                                                    repeat
-                                                                                        Index := Index + 1;
-                                                                                        CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
-                                                                                    until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 12))
-                            end;
-                        end else
-                            if StrLen(CheckAmountText) < (ControlLen - 11) then begin
-                                                                                    repeat
-                                                                                        Index := Index + 1;
-                                                                                        CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
-                                                                                    until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 11))
-                            end;
-                        CheckAmountText :=
-                          DelStr(CheckAmountText, StartingLen + 1, StrLen(DollarSignBefore + DollarSignAfter));
-                        NewLen := StrLen(CheckAmountText);
-                        if NewLen <> StartingLen then
-                            CheckAmountText :=
-                              CopyStr(CheckAmountText, StartingLen + 1) +
-                              CopyStr(CheckAmountText, 1, StartingLen);
-                        PrnChkCheckAmountText[CheckStyle] :=
-                          DollarSignBefore + CheckAmountText + DollarSignAfter;
+                        //AGT_DS++
+                        // Index := 0;
+                        // if CheckAmountText = Text024 then begin
+                        //     if StrLen(CheckAmountText) < (ControlLen - 12) then begin
+                        //                                                             repeat
+                        //                                                                 Index := Index + 1;
+                        //                                                                 CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
+                        //                                                             until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 12))
+                        //     end;
+                        // end else
+                        //     if StrLen(CheckAmountText) < (ControlLen - 11) then begin
+                        //                                                             repeat
+                        //                                                                 Index := Index + 1;
+                        //                                                                 CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
+                        //                                                             until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 11))
+                        //     end;
+                        // CheckAmountText :=
+                        //   DelStr(CheckAmountText, StartingLen + 1, StrLen(DollarSignBefore + DollarSignAfter));
+                        // NewLen := StrLen(CheckAmountText);
+                        // if NewLen <> StartingLen then
+                        //     CheckAmountText :=
+                        //       CopyStr(CheckAmountText, StartingLen + 1) +
+                        //       CopyStr(CheckAmountText, 1, StartingLen);
+                        // PrnChkCheckAmountText[CheckStyle] :=
+                        //   DollarSignBefore + CheckAmountText + DollarSignAfter;
+                        //AGT_DS++
 
                         if CheckStyle = CheckStyle::CA then
                             CheckStyleIndex := 0
@@ -1575,13 +1577,13 @@ report 50008 "NewCheckStubCheckStub"
         Stub2DiscountHeader: Text[30];
         Stub2NetAmountHeader: Text[30];
         Stub2PostingDescHeader: Text[30];
-        USText011: Label 'Document No.';
+        USText011: Label 'Our Voucher Number';
         USText012: Label 'Date';
         USText013: Label 'Amount';
         USText014: Label 'Discount';
         USText015: Label 'Net Amount';
         PostingDesc: Text[100];
-        USText017: Label 'YOUR VOUCHER NUMBER';//'Posting Description';
+        USText017: Label 'Your Voucher Number';//'Posting Description';
         StartingLen: Integer;
         ControlLen: Integer;
         NewLen: Integer;
@@ -1674,7 +1676,7 @@ report 50008 "NewCheckStubCheckStub"
         DocDate := VendLedgEntry2."Document Date";
         CurrencyCode2 := VendLedgEntry2."Currency Code";
         VendLedgEntry2.CalcFields(Amount);
-        vendAmount := VendLedgEntry2.Amount;//AGT_DS
+        vendAmount := Abs(VendLedgEntry2.Amount);//AGT_DS
         VendLedgEntry2.CalcFields("Remaining Amount");
         PostingDesc := VendLedgEntry2.Description;
 
