@@ -1,8 +1,8 @@
-report 50007 "Check_Stub_Check_Stub"
+report 50008 "NewCheckStubCheckStub"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './NewCheckStubCheckStub.rdl';
-    Caption = 'New Check (Stub/Check/Stub)';
+    RDLCLayout = './NewCheckStub.rdl';
+    Caption = 'NewCheckStubCheckStub';
     Permissions = TableData "Bank Account" = m;
 
     dataset
@@ -11,6 +11,7 @@ report 50007 "Check_Stub_Check_Stub"
         {
             DataItemTableView = SORTING("Journal Template Name", "Journal Batch Name", "Posting Date", "Document No.");
             RequestFilterFields = "Journal Template Name", "Journal Batch Name", "Posting Date";
+
             trigger OnAfterGetRecord()
             begin
                 CheckManagement.VoidCheck(VoidGenJnlLine);
@@ -169,12 +170,6 @@ report 50007 "Check_Stub_Check_Stub"
                     }
                     column(ExtDocNo; ExtDocNo)//AGT_DS
                     { }
-                    column(ApplyToDocNo; ApplyToDocNo)//AGT_DS
-                    { }
-                    column(VendAccountNo; VendAccountNo)//AGT_DS
-                    { }
-                    column(VendAccountName; VendAccountName)//AGT_DS
-                    { }
                     column(vendAmount; vendAmount)//AGT_DS
                     { }
                     column(DocDate; DocDate)
@@ -220,7 +215,6 @@ report 50007 "Check_Stub_Check_Stub"
                                     FoundLast := true;
                                     DocNo := '';
                                     ExtDocNo := '';
-                                    ApplyToDocNo := '';
                                     LineAmount := RemainingAmount;
                                     LineAmount2 := RemainingAmount;
                                     CurrentLineAmount := LineAmount2;
@@ -296,10 +290,8 @@ report 50007 "Check_Stub_Check_Stub"
                                                     BalancingType::"G/L Account":
                                                         begin
                                                             DocNo := GenJnlLine2."Document No.";
-                                                            //VendAccountNo := GenJnlLine2."Account No.";
-                                                            ExtDocNo := GenJnlLine2."External Document No.";//AGT_DS
+                                                            ExtDocNo := GenJnlLine2."External Document No.";
                                                             LineAmount := CurrentLineAmount;
-                                                            ApplyToDocNo := GenJnlLine2."Applies-to Doc. No.";//AGT_ds
                                                             LineDiscount := 0;
                                                             PostingDesc := GenJnlLine2.Description;
                                                         end;
@@ -313,7 +305,6 @@ report 50007 "Check_Stub_Check_Stub"
                                                             CustLedgEntry.Find('-');
                                                             CustUpdateAmounts(CustLedgEntry, CurrentLineAmount);
                                                             LineAmount := CurrentLineAmount;
-                                                            ExtDocNo := GenJnlLine2."External Document No.";//AGT_DS
                                                         end;
                                                     BalancingType::Vendor:
                                                         begin
@@ -325,15 +316,12 @@ report 50007 "Check_Stub_Check_Stub"
                                                             VendLedgEntry.Find('-');
                                                             VendUpdateAmounts(VendLedgEntry, CurrentLineAmount);
                                                             LineAmount := CurrentLineAmount;
-                                                            ApplyToDocNo := VendLedgEntry."Document No.";
-                                                            ExtDocNo := GenJnlLine2."External Document No.";//AGT_DS
                                                         end;
                                                     BalancingType::"Bank Account":
                                                         begin
                                                             DocNo := GenJnlLine2."Document No.";
                                                             ExtDocNo := GenJnlLine2."External Document No.";
                                                             LineAmount := CurrentLineAmount;
-                                                            ApplyToDocNo := GenJnlLine2."Applies-to Doc. No.";//AGT_ds
                                                             LineDiscount := 0;
                                                             PostingDesc := GenJnlLine2.Description;
                                                         end;
@@ -366,7 +354,6 @@ report 50007 "Check_Stub_Check_Stub"
                             FoundLast := true;
                             DocNo := Text010;
                             ExtDocNo := Text010;
-                            ApplyToDocNo := Text010;
                             LineAmount := 0;
                             LineDiscount := 0;
                             PostingDesc := '';
@@ -380,7 +367,8 @@ report 50007 "Check_Stub_Check_Stub"
                         Stub2DocDate[Stub2LineNo] := DocDate;
                         Stub2LineAmount[Stub2LineNo] := LineAmount;
                         Stub2LineDiscount[Stub2LineNo] := LineDiscount;
-                        Stub2PostingDesc[Stub2LineNo] := PostingDesc;
+                        Stub2PostingDesc[Stub2LineNo] := ExtDocNo;   //PostingDesc;//AGT_DS
+                        AmountofVLE[Stub2LineNo] := vendAmount;
                     end;
 
                     trigger OnPreDataItem()
@@ -805,6 +793,29 @@ report 50007 "Check_Stub_Check_Stub"
                     column(Stub2PostingDesc_9_; Stub2PostingDesc[9])
                     {
                     }
+                    //AGT_DS
+                    column(AmountofVLE_1; AmountofVLE[1])
+                    { }
+                    column(AmountofVLE_2; AmountofVLE[2])
+                    { }
+                    column(AmountofVLE_3; AmountofVLE[3])
+                    { }
+                    column(AmountofVLE_4; AmountofVLE[4])
+                    { }
+                    column(AmountofVLE_5; AmountofVLE[5])
+                    { }
+                    column(AmountofVLE_6; AmountofVLE[6])
+                    { }
+                    column(AmountofVLE_7; AmountofVLE[7])
+                    { }
+                    column(AmountofVLE_8; AmountofVLE[8])
+                    { }
+                    column(AmountofVLE_9; AmountofVLE[9])
+                    { }
+                    column(AmountofVLE_10; AmountofVLE[10])
+                    { }
+
+                    //AGT_DS
                     column(CheckToAddr_5_; CheckToAddr[5])
                     {
                     }
@@ -826,7 +837,7 @@ report 50007 "Check_Stub_Check_Stub"
                     column(BankCurrencyCode; BankCurrencyCode)
                     {
                     }
-                    column(DollarSignBefore_CheckAmountText_DollarSignAfter; CheckAmountText) //DollarSignBefore + CheckAmountText + DollarSignAfter)//ds
+                    column(DollarSignBefore_CheckAmountText_DollarSignAfter; CheckAmountText)
                     {
                     }
                     column(DescriptionLine_1__; DescriptionLine[1])
@@ -844,8 +855,6 @@ report 50007 "Check_Stub_Check_Stub"
                     column(CheckNoText_Control1020014; CheckNoText)
                     {
                     }
-                    column(CompanyInfo_Picture; CompanyInfo.picture)
-                    { }
                     column(CompanyAddr_6_; CompanyAddr[6])
                     {
                     }
@@ -861,7 +870,6 @@ report 50007 "Check_Stub_Check_Stub"
                     column(CompanyAddr_2_; CompanyAddr[2])
                     {
                     }
-
                     column(CompanyAddr_1_; CompanyAddr[1])
                     {
                     }
@@ -973,30 +981,30 @@ report 50007 "Check_Stub_Check_Stub"
                         else
                             ControlLen := 29;
                         CheckAmountText := CheckAmountText + DollarSignBefore + DollarSignAfter;
-                        // Index := 0;
-                        // if CheckAmountText = Text024 then begin
-                        //     if StrLen(CheckAmountText) < (ControlLen - 12) then begin
-                        //         repeat
-                        //             Index := Index + 1;
-                        //             CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
-                        //         until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 12))
-                        //     end;
-                        // end else
-                        //     if StrLen(CheckAmountText) < (ControlLen - 11) then begin
-                        //         repeat
-                        //             Index := Index + 1;
-                        //             CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
-                        //         until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 11))
-                        //     end;
-                        // CheckAmountText :=
-                        //   DelStr(CheckAmountText, StartingLen + 1, StrLen(DollarSignBefore + DollarSignAfter));
-                        // NewLen := StrLen(CheckAmountText);
-                        // if NewLen <> StartingLen then
-                        //     CheckAmountText :=
-                        //       CopyStr(CheckAmountText, StartingLen + 1) +
-                        //       CopyStr(CheckAmountText, 1, StartingLen);
-                        // PrnChkCheckAmountText[CheckStyle] :=
-                        // DollarSignBefore + CheckAmountText + DollarSignAfter;
+                        Index := 0;
+                        if CheckAmountText = Text024 then begin
+                            if StrLen(CheckAmountText) < (ControlLen - 12) then begin
+                                                                                    repeat
+                                                                                        Index := Index + 1;
+                                                                                        CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
+                                                                                    until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 12))
+                            end;
+                        end else
+                            if StrLen(CheckAmountText) < (ControlLen - 11) then begin
+                                                                                    repeat
+                                                                                        Index := Index + 1;
+                                                                                        CheckAmountText := InsStr(CheckAmountText, '*', StrLen(CheckAmountText) + 1);
+                                                                                    until (Index = ControlLen) or (StrLen(CheckAmountText) >= (ControlLen - 11))
+                            end;
+                        CheckAmountText :=
+                          DelStr(CheckAmountText, StartingLen + 1, StrLen(DollarSignBefore + DollarSignAfter));
+                        NewLen := StrLen(CheckAmountText);
+                        if NewLen <> StartingLen then
+                            CheckAmountText :=
+                              CopyStr(CheckAmountText, StartingLen + 1) +
+                              CopyStr(CheckAmountText, 1, StartingLen);
+                        PrnChkCheckAmountText[CheckStyle] :=
+                          DollarSignBefore + CheckAmountText + DollarSignAfter;
 
                         if CheckStyle = CheckStyle::CA then
                             CheckStyleIndex := 0
@@ -1017,6 +1025,7 @@ report 50007 "Check_Stub_Check_Stub"
                         CheckNoText := Text011;
 
                     Stub2LineNo := 0;
+                    Clear(AmountofVLE);
                     Clear(Stub2DocNo);
                     Clear(Stub2DocDate);
                     Clear(Stub2LineAmount);
@@ -1326,10 +1335,10 @@ report 50007 "Check_Stub_Check_Stub"
 
             trigger OnPreDataItem()
             var
+                CompanyInfo: Record "Company Information";
             begin
                 Copy(VoidGenJnlLine);
                 CompanyInfo.Get();
-                CompanyInfo.CalcFields(Picture);
                 if not TestPrint then begin
                     FormatAddr.Company(CompanyAddr, CompanyInfo);
                     BankAcc2.Get(BankAcc2."No.");
@@ -1442,15 +1451,12 @@ report 50007 "Check_Stub_Check_Stub"
 
     trigger OnPreReport()
     begin
-        CompanyInfo.Get();
-        CompanyInfo.CalcFields(Picture);
         GenJnlTemplate.Get(VoidGenJnlLine.GetFilter("Journal Template Name"));
         if not GenJnlTemplate."Force Doc. Balance" then
             if not Confirm(USText001, true) then
                 Error(USText002);
 
         PageNo := 0;
-
     end;
 
     var
@@ -1491,7 +1497,6 @@ report 50007 "Check_Stub_Check_Stub"
         Employee: Record Employee;
         EmployeeLedgerEntry: Record "Employee Ledger Entry";
         FormatAddr: Codeunit "Format Address";
-        ApplyToDocNo: Text;//AGT_DS;
         CheckManagement: Codeunit CheckManagement;
         PrintCheckHelper: Codeunit "Print Check Helper";
         ChkTransMgt: Report "Check Translation Management";
@@ -1504,10 +1509,6 @@ report 50007 "Check_Stub_Check_Stub"
         CheckAmountText: Text[30];
         DescriptionLine: array[2] of Text[80];
         DocNo: Text[35];
-        VendAccountNo: Text;//AGT_DS
-        VendAccountName: Text;//AGT_DS
-        vendAmount: Decimal;//AGT_DS
-        CompanyInfo: Record "Company Information";//AGT_DS
         ExtDocNo: Text[35];
         VoidText: Text[30];
         LineAmount: Decimal;
@@ -1567,6 +1568,7 @@ report 50007 "Check_Stub_Check_Stub"
         Stub2LineAmount: array[50] of Decimal;
         Stub2LineDiscount: array[50] of Decimal;
         Stub2PostingDesc: array[50] of Text[100];
+        AmountofVLE: array[50] of Decimal;
         Stub2DocNoHeader: Text[30];
         Stub2DocDateHeader: Text[30];
         Stub2AmountHeader: Text[30];
@@ -1574,12 +1576,12 @@ report 50007 "Check_Stub_Check_Stub"
         Stub2NetAmountHeader: Text[30];
         Stub2PostingDescHeader: Text[30];
         USText011: Label 'Document No.';
-        USText012: Label 'Document Date';
+        USText012: Label 'Date';
         USText013: Label 'Amount';
         USText014: Label 'Discount';
         USText015: Label 'Net Amount';
         PostingDesc: Text[100];
-        USText017: Label 'Posting Description';
+        USText017: Label 'YOUR VOUCHER NUMBER';//'Posting Description';
         StartingLen: Integer;
         ControlLen: Integer;
         NewLen: Integer;
@@ -1599,6 +1601,7 @@ report 50007 "Check_Stub_Check_Stub"
         CheckNoText_Control1480000CaptionLbl: Label 'Check No.';
         AlreadyAppliedToEmployeeErr: Label ' is already applied to %1 %2 for employee %3.', Comment = '%1 = Document type, %2 = Document No., %3 = Employee No.';
         BlockedEmplForCheckErr: Label 'You cannot print check because employee %1 is blocked due to privacy.', Comment = '%1 - Employee no.';
+        vendAmount: Decimal;//AGT_DS
 
     local procedure CustUpdateAmounts(var CustLedgEntry2: Record "Cust. Ledger Entry"; RemainingAmount2: Decimal)
     begin
@@ -1666,15 +1669,12 @@ report 50007 "Check_Stub_Check_Stub"
         end;
 
         DocNo := VendLedgEntry2."Document No.";
-        ApplyToDocNo := VendLedgEntry2."Document No.";//AGT_DS
-        VendAccountNo := VendLedgEntry2."Vendor No.";//AGT_DS
-        VendAccountName := VendLedgEntry2."Vendor Name";//AGT_DS
-        VendLedgEntry2.CalcFields(Amount);
-        vendAmount := VendLedgEntry2.Amount;//AGT_DS
         ExtDocNo := VendLedgEntry2."External Document No.";
-        DocNo := ExtDocNo;
+        //DocNo := ExtDocNo;
         DocDate := VendLedgEntry2."Document Date";
         CurrencyCode2 := VendLedgEntry2."Currency Code";
+        VendLedgEntry2.CalcFields(Amount);
+        vendAmount := VendLedgEntry2.Amount;//AGT_DS
         VendLedgEntry2.CalcFields("Remaining Amount");
         PostingDesc := VendLedgEntry2.Description;
 
