@@ -1,4 +1,4 @@
-report 50008 "NewCheckStubCheckStub"
+report 50007 "NewCheckStubCheckStub"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './NewCheckStub.rdl';
